@@ -1,30 +1,32 @@
 import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { Box, CardActionArea } from "@mui/material";
 
-export default function MyCard() {
-  const [isShown, setIsShown] = useState(false);
+export default function MyCard({ blog }) {
 
   return (
     <Card sx={{ textAlign: "center" }}>
       <CardActionArea
-        onMouseEnter={() => setIsShown(true)}
-        onMouseLeave={() => setIsShown(false)}
       >
-        <CardContent sx={{ height: "10rem", width: "15rem", margin: "1rem" }}>
+        <CardContent
+          sx={{ height: "13rem", width: "15rem", margin: "1rem" }}
+        >
           <Typography gutterBottom variant="h5" component="div">
-            Blog
+            {blog?.title}
           </Typography>
-          {isShown ? (
-            <Typography variant="h6" color="text.secondary">
-              Creation Time
-            </Typography>
-          ) : (
-            ""
-          )}
+          <Box
+              component="img"
+              sx={{
+                height: 230,
+                width: 350,
+                maxHeight: { xs: 233, md: 767 },
+                maxWidth: { xs: 350, md: 750 },
+              }}
+              alt="Blog Image"
+              src={blog?.avatar?.url}
+            />
         </CardContent>
       </CardActionArea>
     </Card>

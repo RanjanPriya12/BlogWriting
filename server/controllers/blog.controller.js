@@ -1,7 +1,22 @@
-const Blog=require('../models/blg.model');
+const Blog=require('../models/blog.model');
+const cloudinary = require("cloudinary");
 
 const createBlog= async(req,res)=>{
-    const blog= await Blog.create(req.body);
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: "Avtaar",
+        width: 550,
+        crop: "scale",
+      });
+      const { title, content } = req.body;
+    const blog= await Blog.create({
+            title,
+            content,
+            avatar: {
+              public_id: myCloud.public_id,
+              url: myCloud.secure_url,
+            },
+          
+    });
     return res.status(201).json({success:true,message:"Your Blog Created Successfully",blog:blog});
 }
 

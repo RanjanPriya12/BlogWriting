@@ -24,7 +24,7 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            Blog-App
+            Eqaim Blog
           </Typography>
       </Container>
     </AppBar>

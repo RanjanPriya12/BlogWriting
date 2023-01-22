@@ -5,15 +5,20 @@ import Grid from "@mui/material/Grid";
 import MyCard from "../card/Card";
 import { IconButton } from "@mui/material";
 import PostAddIcon from "@mui/icons-material/PostAdd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllBLogs } from "../../redux/action";
+
 
 export default function Home() {
-  const arr = [
-    1, 2, 4, 21, 223, 31, 31, 34, 21342, 343, 4, 54, 413, 45, 345, 5, 64, 654,
-    6, 546, 54, 65, 46, 54, 645, 6, 4, 64, 6, 546, 54, 6, 46, 45, 654, 6, 54,
-    654, 6, 546,
-  ];
-  const [value, setValue] = useState(arr);
+  const blogs =useSelector(store=>store.blogs);
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
+
+  useEffect(()=>{
+      dispatch(getAllBLogs());
+  },[dispatch]);
   return (
     <React.Fragment>
       <Container maxWidth="xl">
@@ -23,10 +28,10 @@ export default function Home() {
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
-            {value.map((blog, index) => (
+            {blogs?.map((blog, index) => (
               <Grid item xs={2} sm={4} md={3} key={index}>
-                <Link className="link1" to={`/${blog.id}`}>
-                  <MyCard />
+                <Link className="link1" to={`/${blog._id}`}>
+                  <MyCard blog={blog}/>
                 </Link>
               </Grid>
             ))}
@@ -39,7 +44,7 @@ export default function Home() {
           bottom="1rem"
         >
           <IconButton>
-            <PostAddIcon sx={{ fontSize: "3.5rem" }} />
+            <PostAddIcon sx={{ fontSize: "3.5rem" }} onClick={()=>navigate('/newBLog')}/>
           </IconButton>
         </Grid>
       </Container>
