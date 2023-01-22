@@ -1,14 +1,14 @@
 # BlogWriting
 
-## Run Your Server/Backend Using
+### Run Your Server/Backend Using
 * goto server folder using 'cd server'
 * run command 'npm run server'
 
-## Run Your Client/Frontend Using
+### Run Your Client/Frontend Using
 * goto client folder using 'cd client'
 * run command 'npm start'
 
-## TechStack Used:
+### TechStack Used:
 * React js
 * Redux
 * Material UI
